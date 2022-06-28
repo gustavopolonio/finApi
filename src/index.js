@@ -25,6 +25,13 @@ app.post("/account", (req, res) => {
   return res.status(201).send()
 })
 
+app.get("/statement/:cpf", (req, res) => {
+  const { cpf } = req.params
+  const customer = customers.find(customer => customer.cpf === cpf)
+
+  return res.status(200).json( customer.statement )
+})
+
 
 app.listen(3333, () => {
   console.log("Server initialized")
