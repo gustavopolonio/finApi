@@ -47,6 +47,20 @@ app.get("/statement", verifyIfExistsAccountCPF, (req, res) => {
   return res.json( customer.statement )
 })
 
+app.post("/deposit", verifyIfExistsAccountCPF, (req, res) => {
+  const { customer } = req
+  const { amount, description } = req.body
+
+  customer.statement.push({
+    amount,
+    description,
+    type: "credit",
+    date: new Date()
+  })
+
+  return res.status(201).send()
+})
+
 
 app.listen(3333, () => {
   console.log("Server initialized")
