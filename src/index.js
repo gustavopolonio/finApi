@@ -124,7 +124,9 @@ app.put("/account", verifyIfExistsAccountCPF, (req, res) => {
 app.delete("/account", verifyIfExistsAccountCPF, (req, res) => {
   const { customer } = req
 
-  customers.splice(customer, 1)
+  const indexCustomer = customers.findIndex(customerIndex => customerIndex.cpf === customer.cpf)
+
+  customers.splice(indexCustomer, 1)
 
   return res.json(customers)
 })
